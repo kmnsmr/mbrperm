@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <stddef.h>
 #include "perm.h"
 #include "mbr.h"
 
@@ -38,7 +38,7 @@ main (unsigned argc, char** argv)
 	for (unsigned i = 0; i < argc; i++)
 		perm[i] = strtoul (argv[i]);
 
-	if (!valid_perm (perm))
+	if (!valid_perm (perm, argc - 1))
 		fatal ("main: Invalid permutation", argv[0]);
 
 	FILE* file = fopen (argv[1], "rb");
@@ -75,7 +75,9 @@ fopen_fail:
 	unsigned preimage;
 	unsigned image;
 
-	for (unsigned* p = perm; cycle_perm (p, &image, &preimage);)
+	log_perm_size (argc - 1);
+
+	for (unsigned* p = perm; cycle_perm (p, &left, &image, &preimage);)
 		permuted.part[image] = mbr.part[preimage]; 
 
 	file = fopen (argv[1], "ab");
@@ -86,5 +88,5 @@ fopen_fail:
 	write_mbr (&permuted, file);
 	fclose (file);
 
-	exit (EXIT_SUCCESS);
+	return EXIT_SUCCESS;
 }
