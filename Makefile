@@ -1,8 +1,11 @@
 CC ?= $(PREFIX)gcc
-LD ?= $(PREFIX)ld
+CCFLAGS := -Wall -Wextra
 
-CCFLAGS :=
-LDFLAGS :=
+ifeq	($(DEBUG),1)
+
+CCFLAGS += -g -O0
+
+endif
 
 ifndef $(.DEFAULT_GOAL)
 
@@ -11,11 +14,17 @@ $(warning No default goal, defaulting to $(.DEFAULT_GOAL))
 
 endif
 
+.PHONY : all clean
+
+clean :
+
+	rm mbrperm *.{d,o,s}
+
 all : mbrperm
 
-mbrperm : main.o mbr.o perm.o
+mbrperm : main.o mbr.o
 
-	$(LD) -o $@ $? $(LDFLAGS)
+	$(CC) -o $@ $^ $(CCFLAGS)
 
 %.o : %.c
 

@@ -10,7 +10,7 @@ read_mbr (struct mbr_t* mbr, FILE* file)
 		return 0;
 
 	fseek (file, 0, 0); // MBR should be located at the very beginning
-	fread ((uint8_t*) mbr, 1, sizeof (struct mbr_t) file);
+	fread ((uint8_t*) mbr, 1, sizeof (struct mbr_t), file);
 
 	if (mbr->sig != 0xAA55)
 		{
