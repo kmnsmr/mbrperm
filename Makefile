@@ -1,7 +1,7 @@
 CC ?= $(PREFIX)gcc
 CCFLAGS := -Wall -Wextra
 
-ifeq	($(DEBUG),1)
+ifeq ($(DEBUG),1)
 
 CCFLAGS += -g -O0
 
@@ -18,7 +18,7 @@ endif
 
 clean :
 
-	rm mbrperm *.{d,o,s}
+	rm mbrperm *.o
 
 all : mbrperm
 
