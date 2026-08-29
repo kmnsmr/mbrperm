@@ -16,17 +16,19 @@ void
 usage (const char* argv0)
 {
 	const char* USAGE	=
-		"Usage: %s <file> <permutation>\n\n"
+		"\e[1;35mUsage: %s <file> <permutation>\e[m\n\n"
 		"<permutation> represents the permutation to apply to <file>'s MBR "
-		"partition table.\n"
+		"partition\ntable.\n"
 		"It must be expressed in cycle notation, indexes be spaced and 0 "
-		"indexed omitting parentheses and commas.\n\n"
+		"indexed\nomitting parentheses and commas.\n\n"
 		"The following example forms a valid input:\n"
 		"%s mymbr 0 2 1\n \n"
-		"This will move the first partition entry (0) to the third entry (2), "
-		"the third entry to the second (1), and the second to the first.\n\n"
-		"WARNING: %s currently overwrites the entirety of <file> with the "
-		"modified MBR and thus %s should only be used on MBR dumps."
+		"This will move the first partition entry of mymbr's MBR (0) "
+		"to the\nthird entry (2), "
+		"the third entry to the second (1), and the second to\nthe first.\n\n"
+		"\e[1;41;97mWARNING:\e[49m %s currently overwrites the entirety of "
+		"<file> with the\nmodified MBR and thus %s should only be used on MBR " 
+		"dumps.\e[m\n";
 
 	printf (USAGE, argv0, argv0, argv0, argv0);
 }
