@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stddef.h>
 
 static unsigned perm_size;
@@ -8,27 +9,28 @@ log_perm_size (unsigned size)
 	perm_size = size;
 }
 
-int
+bool
 valid_perm (unsigned* perm, unsigned size)
 {
-	if (size > 4)
-		return 0;
+	if (!size || size > 4)
+		return false;
 
-	unsigned occured[4] = {0};
+	bool occured[4] = {false};
 
 	for (; size--; perm++)
 		{
-			if (*perm > 4 /* there can't be more than 4 primary partitions */
-					|| occured[*perm])
-				return 0;
+			if (!*perm || *perm > 4 || occured[*perm])
+				return false;
 
-			occured[*perm] = 1;
+			occured[*perm] = true;
 		}
 
-	return 1;
+	return true;
 }
 
-// Returns 0 if we're finished cycling or perm is NULL, 1 else
+/* Returns 0 if we're finished cycling or perm is NULL, 1 else.
+ * Meant to be used in a for loop like in main.c
+ */
 
 int
 cycle_perm (unsigned* perm, unsigned* preimage, unsigned* image)

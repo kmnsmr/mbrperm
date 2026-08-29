@@ -36,7 +36,7 @@ main (unsigned argc, char** argv)
 		fatal ("main: malloc returned NULL pointer", argv[0]);
 
 	for (unsigned i = 0; i < argc; i++)
-		perm[i] = strtoul (argv[i]);
+		perm[i] = strtoul (argv[i], NULL, "10");
 
 	if (!valid_perm (perm, argc - 1))
 		fatal ("main: Invalid permutation", argv[0]);
@@ -69,8 +69,7 @@ fopen_fail:
 
 	fclose (file);
 
-	struct mbr_t permuted;
-	copy_mbr (&permuted, &mbr);
+	struct mbr_t permuted = mbr;
 
 	unsigned preimage;
 	unsigned image;
