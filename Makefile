@@ -1,5 +1,5 @@
 CC ?= $(PREFIX)gcc
-CCFLAGS := -Wall -Wextra
+CCFLAGS := -I. -Wall -Wextra
 
 ifeq ($(DEBUG),1)
 
