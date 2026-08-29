@@ -42,10 +42,7 @@ usage (const char* argv0)
 		"%s mymbr 0 2 1\n \n"
 		"This will move the first partition entry of mymbr's MBR (0) "
 		"to the\nthird entry (2), "
-		"the third entry to the second (1), and the second to\nthe first.\n\n"
-		"\e[1;41;97mWARNING:\e[49m %s currently overwrites the entirety of "
-		"<file> with the\nmodified MBR and thus %s should only be used on MBR " 
-		"dumps.\e[m\n";
+		"the third entry to the second (1), and the second to\nthe first.\n\n";
 
 	printf (USAGE, argv0, argv0, argv0, argv0);
 }
@@ -116,7 +113,7 @@ fopen_fail:
 			permuted.part[image] = mbr.part[preimage];
 		}
 
-	file = fopen (argv[1], "wb");
+	file = fopen (argv[1], "rb+");
 
 	if (file == NULL)
 		goto fopen_fail;
