@@ -27,6 +27,10 @@ read_mbr (struct mbr_t* mbr, FILE* file)
 		return 0;
 
 	fseek (file, 0, 0); // MBR should be located at the very beginning
+
+	// we can read like this since the mbr struct is packed, might not
+	// be possible on certain target architectures though if they don't
+	// support reading and writing from unaligned memory addresses
 	fread ((uint8_t*) mbr, 1, sizeof (struct mbr_t), file);
 
 	if (mbr->sig != 0xAA55)
@@ -45,5 +49,7 @@ write_mbr (struct mbr_t* mbr, FILE* file)
 		return;
 
 	fseek (file, 0, 0);
+
+	// same as above
 	fwrite ((const uint8_t*) mbr, 1, sizeof (struct mbr_t), file);
 }
