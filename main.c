@@ -1,4 +1,4 @@
-/* Copyright (C) 2026 kiksmr
+/* Copyright (C) 2026 kmnsmr
  *
  * This file is part of mbrperm.
  * 
