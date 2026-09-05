@@ -101,7 +101,7 @@ fopen_fail:
 			preimage = strtoul (argv[i], &end, 10);
 
 			if (*end || preimage >= 4)
-				fatal ("main: Invalid permutation: %s\n", argv[i]);
+				fatal ("main: Invalid permutation element: %s\n", argv[i]);
 
 			i++;
 
@@ -112,7 +112,7 @@ fopen_fail:
 					image = strtoul (argv[i], &end, 10);
 
 					if (*end || preimage >= 4)
-						fatal ("main: Invalid permutation: %s\n", argv[i]);
+						fatal ("main: Invalid permutation element: %s\n", argv[i]);
 				}
 
 			permuted.part[image] = mbr.part[preimage];
